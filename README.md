@@ -14,7 +14,9 @@ This repository requires the following libraries to be installed:
 
 ## Structure
 This repository is organized into the following folders and files:
-* `datasets`: Contains Original_dataset
+* `datasets`: Currently three datasets FB13, YAGO and ICEWS14 are available
 * `Anonymised_Data_raw`: Contains anonymized data in raw format
+
+## Datasets
 
 ## Anonymization script
