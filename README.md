@@ -20,3 +20,36 @@ This repository is organized into the following folders and files:
 ## Datasets
 
 ## Anonymization script
+
+### Snapshot Creation
+Creating snapshots: from the temporal dataset folder Temporal_Dataset, creates snapshots in the folder Snapshots
+
+<code>python SnapshotsCreationFreebase.py</code>
+
+<code>python SnapshotsCreationYago.py</code>
+
+
+### Preparing data for anonymizing
+we assign random sensitive value to entities that do not have a sensitive values. creates sentences dataset ready for anonymization
+
+<code>python DatasetsComparison_ForAnon.py --data=fb13</code>
+
+Supported datasets: `fb13`, `yago`, `icews14`
+
+### Anonymization
+
+<code>python Anonymization_Process.py --data=fb13</code>
+
+Gives information about fake nodes, discarded nodes, Information loss, average sensitive attribute similarities within groups, average sentence embeddings similarities within groups, creates raw anonymized data in folder Anonymised_Data_raw.
+
+### Generating anonymized triples
+Generating triples from anonymized raw data from folder Anonymised_Data_raw: 
+
+<code>python TriplesGenerationFromAnonymizedData.py</code>
+
+### Ideal values of k and l
+Needs SE and SA distances
+
+<code>python k_l_optimization.py</code>
+
+### Knowledge graph embeddings
