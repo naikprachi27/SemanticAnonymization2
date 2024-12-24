@@ -48,8 +48,12 @@ Generating triples from anonymized raw data from folder Anonymised_Data_raw:
 <code>python TriplesGenerationFromAnonymizedData.py</code>
 
 ### Ideal values of k and l
-Needs SE and SA distances
+Needs SE and SA distances to solve Multi-Objective Optimization Problem.
 
 <code>python k_l_optimization.py</code>
 
 ### Knowledge graph embeddings
+
+We have to create anonymised Train data, and non-anonymised test and valid data. Train models with both non-anonymised and anonymised train data, and test both the models with non-anonymised test and valid data.
+
+<code>python ampligraph_transe_fb13.py</code>
