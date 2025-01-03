@@ -2,7 +2,7 @@ import ast
 import pandas as pd
 import re
 
-dir_path = "Datasets/ICEWS/anonymisedOutputs_final_x_train_make_a_visit_icews/"
+dir_path = "Anonymised_Data_raw/"
 # File path to read data from
 input_path = dir_path + "valid_groups_with_count_of_nodes.txt"
 
@@ -44,7 +44,7 @@ print(len(data2))
 
 # Initialize counters for groups and starting individual numbers
 individual_id_start = 1  # Tracks starting individual number for each group
-output_path = "Datasets/ICEWS/Anonymised/Final_final_training_data_ICEWS.tsv"
+output_path = "Anonymised_Data_raw/Final_training_data_for_KGE.tsv"
 
 
 # print(len(df.iloc[:,0].unique()))

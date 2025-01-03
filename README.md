@@ -14,12 +14,12 @@ This repository requires the following libraries to be installed:
 
 ## Structure
 This repository is organized into the following folders and files:
-* `datasets`: Currently three datasets FB13, YAGO and ICEWS14 are available
-* `Anonymised_Data_raw`: Contains anonymized data in raw format
+* `datasets`: Three datasets FB13, YAGO and ICEWS14 are available in Datasets/Original_Dataset folder.
+* `Anonymised_Data_raw`: Contains anonymized data in raw format. Present in Anonymised_Data_raw folder.
+* `Sentences Dataset`: Datasets/Sentences_Dataset folder contains data in sentences format. These sentences will later be clustered as per their embeddings.
 
-## Datasets
 
-## Anonymization script
+## Anonymization process
 
 ### Snapshot Creation
 Creating snapshots: from the temporal dataset folder Temporal_Dataset, creates snapshots in the folder Snapshots
@@ -30,7 +30,7 @@ Creating snapshots: from the temporal dataset folder Temporal_Dataset, creates s
 
 
 ### Preparing data for anonymizing
-we assign random sensitive value to entities that do not have a sensitive values. creates sentences dataset ready for anonymization
+We assign random sensitive value to entities that do not have a sensitive values. We also create sentences dataset ready for anonymization
 
 <code>python DatasetsComparison_ForAnon.py --data=fb13</code>
 

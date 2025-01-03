@@ -16,9 +16,9 @@ Original file is located at
 
 from ampligraph.datasets import load_from_csv
 X = {"train":[], "test":[], "valid":[]}
-X["train"] = load_from_csv("FB13 original dataset/", "x_train_FB13_1lac_final.tsv", sep='\t')
-X["test"] = load_from_csv("FB13 original dataset/", "x_test_FB13_final.tsv", sep='\t')
-X["valid"] = load_from_csv("FB13 original dataset/", "x_valid_FB13_final.tsv", sep='\t')
+X["train"] = load_from_csv("Anonymised_Data_raw/", "Final_training_data_for_KGE.tsv", sep='\t')
+X["test"] = load_from_csv("Datasets/Anonymised_dataset/fb13/mapping_output/", "numbered_2.tsv", sep='\t')
+X["valid"] = load_from_csv("Datasets/Anonymised_dataset/fb13/mapping_output/", "numbered_3.tsv", sep='\t')
 
 import pandas as pd
 train = pd.DataFrame(X["train"])
@@ -101,7 +101,7 @@ model.fit(X["train"],
 from ampligraph.utils import save_model
 
 # Save the model
-example_name = "newModels/Ampligraph_TransE_FB13.pkl"
+example_name = "KGModels/Ampligraph_TransE_FB13.pkl"
 save_model(model, model_name_path=example_name)
 
 from ampligraph.evaluation import mrr_score, hits_at_n_score
@@ -120,62 +120,62 @@ print("hits_1: %f, hits_5: %f" % (hits_1, hits_5))
 
 # !unzip -q /content/Ampligraph_ComplEx_inbuiltDataset.zip -d ampligraph_DistMult_inbuiltDataset3lacs1_new.pkl/
 
-from ampligraph.utils import save_model, restore_model
+# from ampligraph.utils import save_model, restore_model
 
-# Restore the model
-example_name = "newModels/Ampligraph_TransE_FB13.pkl"
-restored_model = restore_model(model_name_path=example_name)
+# # Restore the model
+# example_name = "KGModels/Ampligraph_TransE_FB13.pkl"
+# restored_model = restore_model(model_name_path=example_name)
 
-if restored_model.is_fitted:
-    print('The model is fit!')
-else:
-    print('The model is not fit! Did you skip a step?')
+# if restored_model.is_fitted:
+#     print('The model is fit!')
+# else:
+#     print('The model is not fit! Did you skip a step?')
 
-invalid_keys = model.get_invalid_keys(X["test"])
+# invalid_keys = model.get_invalid_keys(X["test"])
 
-print("Test : ")
-print("Invalid keys sub:", (invalid_keys[0]))
-print("Invalid keys rel:", (invalid_keys[1]))
-print("Invalid keys obj:", (invalid_keys[2]))
-invalid_sub_set = set(invalid_keys[0])
+# print("Test : ")
+# print("Invalid keys sub:", (invalid_keys[0]))
+# print("Invalid keys rel:", (invalid_keys[1]))
+# print("Invalid keys obj:", (invalid_keys[2]))
+# invalid_sub_set = set(invalid_keys[0])
 
-invalid_keys = model.get_invalid_keys(X["valid"])
-print("valid : ")
-print("Invalid keys sub:", (invalid_keys[0]))
-print("Invalid keys rel:", (invalid_keys[1]))
-print("Invalid keys obj:", (invalid_keys[2]))
+# invalid_keys = model.get_invalid_keys(X["valid"])
+# print("valid : ")
+# print("Invalid keys sub:", (invalid_keys[0]))
+# print("Invalid keys rel:", (invalid_keys[1]))
+# print("Invalid keys obj:", (invalid_keys[2]))
 
-len(invalid_sub_set)
+# len(invalid_sub_set)
 
 
-import pandas as pd
-from ampligraph.evaluation import mrr_score, hits_at_n_score
-import numpy as np
+# import pandas as pd
+# from ampligraph.evaluation import mrr_score, hits_at_n_score
+# import numpy as np
 
-filter = {'test' : np.concatenate((X["train"], X["valid"], X["test"]))}
-ranks = restored_model.evaluate(X["test"],
-                       use_filter=filter,
-                       corrupt_side='s,o')
+# filter = {'test' : np.concatenate((X["train"], X["valid"], X["test"]))}
+# ranks = restored_model.evaluate(X["test"],
+#                        use_filter=filter,
+#                        corrupt_side='s,o')
 
-# compute and print metrics:
-mrr = mrr_score(ranks)
-hits_10 = hits_at_n_score(ranks, n=10)
-hits_1 = hits_at_n_score(ranks, n=1)
-hits_5 = hits_at_n_score(ranks, n=5)
-print("MRR: %f, Hits@10: %f" % (mrr, hits_10))
-print("hits_1: %f, hits_5: %f" % (hits_1, hits_5))
+# # compute and print metrics:
+# mrr = mrr_score(ranks)
+# hits_10 = hits_at_n_score(ranks, n=10)
+# hits_1 = hits_at_n_score(ranks, n=1)
+# hits_5 = hits_at_n_score(ranks, n=5)
+# print("MRR: %f, Hits@10: %f" % (mrr, hits_10))
+# print("hits_1: %f, hits_5: %f" % (hits_1, hits_5))
 
-max_rank = np.max(ranks[:,1])
-second_col = ranks[:,1]
-unique_vals = np.unique(second_col)
+# max_rank = np.max(ranks[:,1])
+# second_col = ranks[:,1]
+# unique_vals = np.unique(second_col)
 
-if len(unique_vals) > 1:
-    second_max = unique_vals[-2]
-else:
-    second_max = None
+# if len(unique_vals) > 1:
+#     second_max = unique_vals[-2]
+# else:
+#     second_max = None
 
-print(max_rank)
-print(second_max)
-zero_ranks = np.where(ranks[:,1] == 38617)[0]
-zero_ranks
+# print(max_rank)
+# print(second_max)
+# zero_ranks = np.where(ranks[:,1] == 38617)[0]
+# zero_ranks
 
